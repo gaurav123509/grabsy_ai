@@ -3,9 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Grabsy AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #000428, #004e92);
+            overflow: hidden;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        input[type="text"]::placeholder {
+            color: #ccc;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            font-size: 1em;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px #00f2fe, 0 0 25px #00f2fe;
+        }
+
+        button:hover {
+            box-shadow: 0 0 20px #4facfe, 0 0 35px #4facfe;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            box-shadow: 0 0 25px #007acc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Grabsy AI!</h1>
-    <p>This is your Flask app hosted on Render.</p>
+    <div class="glass-box">
+        <h1>Grabsy AI</h1>
+        <form action="/download" method="post">
+            <input type="text" name="url" placeholder="Paste video link here" required>
+            <br>
+            <button type="submit">🚀 Download</button>
+        </form>
+    </div>
 </body>
 </html>
