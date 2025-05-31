@@ -9,6 +9,10 @@ app = Flask(__name__)
 if not os.path.exists('downloads'):
     os.makedirs('downloads')
 
+@app.route('/')
+def home():
+    return "🚀 Grabsy AI backend is running!"
+
 @app.route('/download', methods=['POST'])
 def download():
     url = request.form.get('url')
@@ -41,6 +45,7 @@ def download():
         return send_file(output_path, as_attachment=True)
     except Exception as e:
         return f"❌ Error: {str(e)}", 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
