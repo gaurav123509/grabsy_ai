@@ -1,23 +1,24 @@
-from flask import Flask, render_template, request, send_file
-import yt_dlp
-import os
-import uuid
-
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
 @app.route('/download', methods=['POST'])
 def download():
     url = request.form['url']
-    video_id = str(uuid.uuid4())  # ek unique naam banane ke liye
+    video_id = str(uuid.uuid4())
     output_path = f"downloads/{video_id}.mp4"
 
     ydl_opts = {
         'outtmpl': output_path,
-        'format': 'best',  # best quality
+        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        'noplaylist': True,
+        'quiet': True,
+        'nocheckcertificate': True,
+        'skip_download': False,
+        'retries': 3,
+        'geo_bypass': True,
+        'no_warnings': True,
+        'ignoreerrors': False,
+        'cookiefile': None,  # Force no cookies
+        'username': None,
+        'password': None,
+        'usenetrc': False,
     }
 
     try:
@@ -26,6 +27,3 @@ def download():
         return send_file(output_path, as_attachment=True)
     except Exception as e:
         return f"❌ Error: {str(e)}"
-
-if __name__ == '__main__':
-    app.run(debug=True)
