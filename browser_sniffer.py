@@ -7,7 +7,7 @@ def get_video_urls_from_page(url):
             context = browser.new_context()
             page = context.new_page()
 
-            page.goto(url, wait_until="networkidle", timeout=10000)  # 10s timeout
+            page.goto(url, wait_until="networkidle", timeout=10000)
             page.wait_for_timeout(2000)
 
             video_urls = page.eval_on_selector_all(
@@ -17,7 +17,9 @@ def get_video_urls_from_page(url):
 
             browser.close()
             return video_urls
+
     except PlaywrightTimeoutError:
-        return []
-    except Exception as e:
-        return [f"Error: {str(e)}"]
+        raise Exception("⏰ Timeout while loading the page")
+    except Exception:
+        raise  # preserves full traceback
+
