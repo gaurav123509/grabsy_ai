@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, render_template
 import yt_dlp
 import uuid
 import os
@@ -11,7 +11,7 @@ if not os.path.exists('downloads'):
 
 @app.route('/')
 def home():
-    return "🚀 Grabsy AI backend is running!"
+    return render_template('index.html')
 
 @app.route('/download', methods=['POST'])
 def download():
